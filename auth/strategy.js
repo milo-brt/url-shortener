@@ -1,5 +1,5 @@
 import CustomStrategy from "passport-custom";
-import User from "../models/user.js";
+import User from "../models/User.js";
 
 const idpStrategy = new CustomStrategy(async function verify(req, done) {
     if (!req.query.t) {
