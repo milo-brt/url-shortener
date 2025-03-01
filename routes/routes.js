@@ -2,8 +2,8 @@ import express from "express";
 import session from "express-session";
 import passport from "passport";
 import path from "path";
-import User from "../models/user.js";
-import Link from "../models/link.js";
+import User from "../models/User.js";
+import Link from "../models/Link.js";
 import strategy from "../auth/strategy.js"
 
 const router = express.Router();
