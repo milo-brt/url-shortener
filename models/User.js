@@ -23,5 +23,4 @@ const schema = new mongoose.Schema(
   { minimize: false },
 );
 
-export default connection
-  .model("users", schema);
+export default connection.model("users", schema);

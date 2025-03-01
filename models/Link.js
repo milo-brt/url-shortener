@@ -43,10 +43,9 @@ const schema = new mongoose.Schema(
     shared: {
       type: Boolean,
       default: false,
-    }
+    },
   },
   { minimize: false },
 );
 
-export default connection
-  .model("links", schema);
+export default connection.model("links", schema);

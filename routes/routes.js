@@ -4,7 +4,7 @@ import passport from "passport";
 import path from "path";
 import User from "../models/User.js";
 import Link from "../models/Link.js";
-import strategy from "../auth/strategy.js"
+import strategy from "../auth/strategy.js";
 
 const router = express.Router();
 
@@ -31,14 +31,14 @@ passport.deserializeUser(async function (idpId, cb) {
       .then(async (result) => {
         const idpRequest = await fetch(
           "https://idp.milobrt.fr/user" +
-          "?u=" +
-          encodeURIComponent(result.session) +
-          "&t=" +
-          encodeURIComponent(result.ticket) +
-          "&s=" +
-          encodeURIComponent(process.env.URL_IDP_ID) +
-          "&c=" +
-          encodeURIComponent(process.env.URL_IDP_SECRET),
+            "?u=" +
+            encodeURIComponent(result.session) +
+            "&t=" +
+            encodeURIComponent(result.ticket) +
+            "&s=" +
+            encodeURIComponent(process.env.URL_IDP_ID) +
+            "&c=" +
+            encodeURIComponent(process.env.URL_IDP_SECRET),
           {
             method: "GET",
           },
@@ -144,16 +144,20 @@ router
   .route("/urls/api/links")
   .get(async (req, res, next) => {
     try {
-      let links = await Link.find({ $or: [{ owner: req.user._id }, { shared: true }] }).select("-__v -_id");
+      let links = await Link.find({
+        $or: [{ owner: req.user._id }, { shared: true }],
+      }).select("-__v -_id");
       return res.json(links);
     } catch (err) {
       return next(err);
     }
   })
   .post(async (req, res, next) => {
-    try {      
+    try {
       if ("67c357801eb05f94cb674f4c" in req.user.groups) {
-        return res.status(403).json({ message: "This is a demo account, you can't create links!" });
+        return res
+          .status(403)
+          .json({ message: "This is a demo account, you can't create links!" });
       }
       if (!req.body.url)
         return res.status(400).json({ message: "URL is required" });
@@ -197,7 +201,9 @@ router
   .delete(async (req, res, next) => {
     try {
       if ("67c357801eb05f94cb674f4c" in req.user.groups) {
-        return res.status(403).json({ message: "This is a demo account, you can't deactivate links!" });
+        return res.status(403).json({
+          message: "This is a demo account, you can't deactivate links!",
+        });
       }
       let link = await Link.findOne({ handle: req.params.handle });
       if (!link) return res.status(404).json({ message: "Link not found" });
@@ -209,9 +215,11 @@ router
     }
   })
   .put(async (req, res, next) => {
-    try {      
+    try {
       if ("67c357801eb05f94cb674f4c" in req.user.groups) {
-        return res.status(403).json({ message: "This is a demo account, you can't activate links!" });
+        return res.status(403).json({
+          message: "This is a demo account, you can't activate links!",
+        });
       }
       let link = await Link.findOne({ handle: req.params.handle });
       if (!link) return res.status(404).json({ message: "Link not found" });

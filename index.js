@@ -13,6 +13,6 @@ router.use(express.json());
 router.set("view engine", "ejs");
 router.set("views", path.join(__dirname, "/views"));
 
-router.use(routes)
+router.use(routes);
 
 export default router;
