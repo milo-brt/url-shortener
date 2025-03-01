@@ -49,5 +49,4 @@ const schema = new mongoose.Schema(
 );
 
 export default connection
-  .useDb("url-shortener")
   .model("links", schema);
