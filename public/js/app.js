@@ -30,20 +30,27 @@ function activateAction(button, handle) {
   })
     .then((res) => {
       if (!res.ok) {
-        throw new Error(res.body ? res.body.message : "An error occured");
+        res.json().then((body) => {
+          if (body) {
+            setAlert("Error", body.message, "inactive")
+          } else {
+            setAlert("Error", "", "inactive")
+          }
+        });
+      } else {
+        setAlert("Success", `Link /${handle} activated`, "active");
+        button.parentElement
+          .querySelector(".status")
+          .classList.remove("inactive");
+        button.parentElement.querySelector(".status").classList.add("active");
+        button.parentElement.querySelector(".status p").innerHTML = "Active";
+        button.innerHTML = "Deactivate";
+        var new_element = button.cloneNode(true);
+        button.parentNode.replaceChild(new_element, button);
+        new_element.addEventListener("click", () =>
+          deactivateAction(new_element, handle),
+        );
       }
-      setAlert("Success", `Link /${handle} activated`, "active");
-      button.parentElement
-        .querySelector(".status")
-        .classList.remove("inactive");
-      button.parentElement.querySelector(".status").classList.add("active");
-      button.parentElement.querySelector(".status p").innerHTML = "Active";
-      button.innerHTML = "Deactivate";
-      var new_element = button.cloneNode(true);
-      button.parentNode.replaceChild(new_element, button);
-      new_element.addEventListener("click", () =>
-        deactivateAction(new_element, handle),
-      );
     })
     .catch((error) => {
       setAlert("Error", error, "inactive");
@@ -56,18 +63,25 @@ function deactivateAction(button, handle) {
   })
     .then((res) => {
       if (!res.ok) {
-        throw new Error(res.body ? res.body.message : "An error occured");
+        res.json().then((body) => {
+          if (body) {
+            setAlert("Error", body.message, "inactive")
+          } else {
+            setAlert("Error", "", "inactive")
+          }
+        });
+      } else {
+        setAlert("Success", `Link /${handle} deactivated`, "active");
+        button.parentElement.querySelector(".status").classList.remove("active");
+        button.parentElement.querySelector(".status").classList.add("inactive");
+        button.parentElement.querySelector(".status p").innerHTML = "Inactive";
+        button.innerHTML = "Activate";
+        var new_element = button.cloneNode(true);
+        button.parentNode.replaceChild(new_element, button);
+        new_element.addEventListener("click", () =>
+          activateAction(new_element, handle),
+        );
       }
-      setAlert("Success", `Link /${handle} deactivated`, "active");
-      button.parentElement.querySelector(".status").classList.remove("active");
-      button.parentElement.querySelector(".status").classList.add("inactive");
-      button.parentElement.querySelector(".status p").innerHTML = "Inactive";
-      button.innerHTML = "Activate";
-      var new_element = button.cloneNode(true);
-      button.parentNode.replaceChild(new_element, button);
-      new_element.addEventListener("click", () =>
-        activateAction(new_element, handle),
-      );
     })
     .catch((error) => {
       setAlert("Error", error, "inactive");
@@ -133,10 +147,17 @@ function signOut() {
   })
     .then((res) => {
       if (!res.ok) {
-        throw new Error(res.body ? res.body.message : "An error occured");
+        res.json().then((body) => {
+          if (body) {
+            setAlert("Error", body.message, "inactive")
+          } else {
+            setAlert("Error", "", "inactive")
+          }
+        });
+      } else {
+        window.location.href =
+          "https://idp.milobrt.fr/logout?service=6669c7c9d8923458c086e421";
       }
-      window.location.href =
-        "https://idp.milobrt.fr/logout?service=6669c7c9d8923458c086e421";
     })
     .catch((error) => {
       setAlert("Error", error, "inactive");
@@ -180,15 +201,24 @@ document.addEventListener("DOMContentLoaded", function () {
     })
       .then((res) => {
         if (!res.ok) {
-          throw new Error(res.body ? res.body.message : "An error occured");
+          res.json().then((body) => {
+            if (body) {
+              setAlert("Error", body.message, "inactive")
+            } else {
+              setAlert("Error", "", "inactive")
+            }
+          });
+        } else {
+          return res.json();
         }
-        return res.json();
       })
       .then((link) => {
-        addLink(link);
-        form.url.value = "";
-        form.handle.value = "";
-        setAlert("Success", `Link /${link.handle} created`, "active");
+        if (link) {
+          addLink(link);
+          form.url.value = "";
+          form.handle.value = "";
+          setAlert("Success", `Link /${link.handle} created`, "active");
+        }
       })
       .catch((error) => {
         setAlert("Error", error, "inactive");
@@ -198,9 +228,16 @@ document.addEventListener("DOMContentLoaded", function () {
   fetch("/urls/api/links")
     .then((res) => {
       if (!res.ok) {
-        throw new Error(res.body ? res.body.message : "An error occured");
+        res.json().then((body) => {
+          if (body) {
+            setAlert("Error", body.message, "inactive")
+          } else {
+            setAlert("Error", "", "inactive")
+          }
+        });
+      } else {
+        return res.json();
       }
-      return res.json();
     })
     .then((links) => {
       links.forEach((link) => {
