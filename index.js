@@ -7,12 +7,13 @@ import cookieParser from "cookie-parser";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const router = express();
-router.use(cookieParser());
-router.use(express.json());
-router.set("view engine", "ejs");
-router.set("views", path.join(__dirname, "/views"));
+const app = express();
+app.use(cookieParser());
+app.use(express.json());
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "/views"));
+app.use("/urls", express.static(path.join(__dirname, "/public")));
 
-router.use(routes);
+app.use(routes);
 
-export default router;
+export default app;

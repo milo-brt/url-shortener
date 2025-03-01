@@ -121,10 +121,6 @@ router.get("/urls/sso", function (req, res, next) {
   })(req, res, next);
 });
 
-router.use(
-  "/urls",
-  express.static(path.join(process.cwd(), "url-shortener/public")),
-);
 router.use("/urls", ensureAuthenticated);
 router.get("/urls", (req, res) => {
   res.render("index-url", { user: req.user });
