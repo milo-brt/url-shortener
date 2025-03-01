@@ -1,7 +1,6 @@
 import express from "express";
 import session from "express-session";
 import passport from "passport";
-import path from "path";
 import User from "../models/User.js";
 import Link from "../models/Link.js";
 import strategy from "../auth/strategy.js";
@@ -150,6 +149,7 @@ router
   })
   .post(async (req, res, next) => {
     try {
+      console.log(req.user.groups);
       if ("67c357801eb05f94cb674f4c" in req.user.groups) {
         return res
           .status(403)
