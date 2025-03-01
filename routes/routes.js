@@ -149,8 +149,7 @@ router
   })
   .post(async (req, res, next) => {
     try {
-      console.log(req.user.groups);
-      if ("67c357801eb05f94cb674f4c" in req.user.groups) {
+      if (req.user.groups.includes(process.env.DEMO_GROUP)) {
         return res
           .status(403)
           .json({ message: "This is a demo account, you can't create links!" });
@@ -196,7 +195,7 @@ router
   .route("/urls/api/links/:handle")
   .delete(async (req, res, next) => {
     try {
-      if ("67c357801eb05f94cb674f4c" in req.user.groups) {
+      if (req.user.groups.includes(process.env.DEMO_GROUP)) {
         return res.status(403).json({
           message: "This is a demo account, you can't deactivate links!",
         });
@@ -212,7 +211,7 @@ router
   })
   .put(async (req, res, next) => {
     try {
-      if ("67c357801eb05f94cb674f4c" in req.user.groups) {
+      if (req.user.groups.includes(process.env.DEMO_GROUP)) {
         return res.status(403).json({
           message: "This is a demo account, you can't activate links!",
         });
