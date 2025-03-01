@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milo Bretet - URLs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <nav>
+        <div class="ghost"></div>
+        <div class="nav-text">
+            <h1>URLs Manager</h1>
+            <p>Welcome <%=user.displayName%></p>
+        </div>
+        <div>
+            <img src="<%=(user.external.google.picture || user.external.discord.picture || 'https://img.freepik.com/vecteurs-libre/gradient-bleu-utilisateur_78370-4692.jpg')%>"
+                alt="User's profile picture" id="pfp">
+            <div class="profile-box" id="menu">
+                <p><%=user.displayName%></p>
+                <p class="subtitle"><%=user.email%></p>
+                <button onclick="signOut()">Sign out</button>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="profile">
+            <img src="<%=(user.external.google.picture || user.external.discord.picture || 'https://img.freepik.com/vecteurs-libre/gradient-bleu-utilisateur_78370-4692.jpg')%>"
+                alt="User's profile picture small" id="pfp-small">
+            <div class="profile-info">
+                <p><%=user.displayName%></p>
+                <p class="subtitle"><%=user.email%></p>
+                <button onclick="signOut()">Sign out</button>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="create">
+            <h3>Create a shortcut/redirect</h3>
+            <form id="le-form">
+                <div class="group">
+                    <label for="url">URL</label>
+                    <input type="url" name="url" id="url" placeholder="Type your URL here" autocomplete="off" required>
+                </div>
+                <div class="group">
+                    <label for="handle">Handle</label>
+                    <input type="text" name="handle" id="handle" placeholder="Choose a handle (optional)" maxlength="5"
+                        pattern="([a-z]|[0-9]){1,5}" autocomplete="off">
+                </div>
+                <button type="submit">Create</button>
+            </form>
+        </div>
+    </div>
+    <div class="links-container">
+        <h2>Your links</h2>
+        <div class="links" id="links">
+        </div>
+    </div>
+    <div class="alert-container" id="alert">
+        <h4 id="alert-title"></h4>
+        <p id="alert-message"></p>
+    </div>
+</body>
+
+<script src="/js/app.js"></script>
+
+</html>
