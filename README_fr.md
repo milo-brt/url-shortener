@@ -17,7 +17,7 @@ L'application enregistre également la date de création et le nombre de visites
 Pour éviter que quiconque puisse créer ou supprimer des raccourcis avec votre domaine, l'application est protégée par un système d'authentification avec `Passport.js`. Elle utilise mon propre fournisseur d'identité qui gère aussi le processus d'autorisation mais vous pouvez facilement le remplacer par un autre grâce aux stratégies de `Passport.js`
 
 ## Démonstration  
-Voici à quoi ressemble l'interface de l'application
+Voici à quoi ressemble l'interface de l'application  
 <img src="demo.png" alt="Image de l'interface" width="500px">
 
 Vous pouvez la tester avec le compte de démonstration suivant (accès en lecture seule) :  
