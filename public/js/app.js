@@ -32,9 +32,9 @@ function activateAction(button, handle) {
       if (!res.ok) {
         res.json().then((body) => {
           if (body) {
-            setAlert("Error", body.message, "inactive")
+            setAlert("Error", body.message, "inactive");
           } else {
-            setAlert("Error", "", "inactive")
+            setAlert("Error", "", "inactive");
           }
         });
       } else {
@@ -65,14 +65,16 @@ function deactivateAction(button, handle) {
       if (!res.ok) {
         res.json().then((body) => {
           if (body) {
-            setAlert("Error", body.message, "inactive")
+            setAlert("Error", body.message, "inactive");
           } else {
-            setAlert("Error", "", "inactive")
+            setAlert("Error", "", "inactive");
           }
         });
       } else {
         setAlert("Success", `Link /${handle} deactivated`, "active");
-        button.parentElement.querySelector(".status").classList.remove("active");
+        button.parentElement
+          .querySelector(".status")
+          .classList.remove("active");
         button.parentElement.querySelector(".status").classList.add("inactive");
         button.parentElement.querySelector(".status p").innerHTML = "Inactive";
         button.innerHTML = "Activate";
@@ -149,9 +151,9 @@ function signOut() {
       if (!res.ok) {
         res.json().then((body) => {
           if (body) {
-            setAlert("Error", body.message, "inactive")
+            setAlert("Error", body.message, "inactive");
           } else {
-            setAlert("Error", "", "inactive")
+            setAlert("Error", "", "inactive");
           }
         });
       } else {
@@ -203,9 +205,9 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!res.ok) {
           res.json().then((body) => {
             if (body) {
-              setAlert("Error", body.message, "inactive")
+              setAlert("Error", body.message, "inactive");
             } else {
-              setAlert("Error", "", "inactive")
+              setAlert("Error", "", "inactive");
             }
           });
         } else {
@@ -230,9 +232,9 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!res.ok) {
         res.json().then((body) => {
           if (body) {
-            setAlert("Error", body.message, "inactive")
+            setAlert("Error", body.message, "inactive");
           } else {
-            setAlert("Error", "", "inactive")
+            setAlert("Error", "", "inactive");
           }
         });
       } else {
